@@ -1,5 +1,3 @@
-/* global FileReader, Papa, Handsontable */
-
 var input = document.getElementById('input-file')
 var handsontableContainer = document.getElementById('handsontable-container')
 
@@ -17,12 +15,16 @@ input.onchange = function () {
     // reset container
     handsontableContainer.innerHTML = ''
     handsontableContainer.className = ''
+    document.querySelector('input').remove()
+    document.querySelector('.github-corner').remove()
 
     Handsontable(handsontableContainer, {
       data: data.data,
       rowHeaders: true,
       colHeaders: data.meta.fields,
-      columnSorting: true
+      columnSorting: true,
+      width: '100%',
+      licenseKey: 'non-commercial-and-evaluation',
     })
   }
 
