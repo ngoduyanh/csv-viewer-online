@@ -7,6 +7,19 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.place-your-ad-here {
+  position: fixed;
+  top: 20px;
+  border: 3px solid #126BCF;
+  border-radius: 5px;
+  color: #126BCF;
+  font-weight: bold;
+  padding: 10px 25px;
+  text-align: center;
+  line-height: 1.5;
 }
 
 .github-corner:hover .octo-arm { animation: octocat-wave 560ms ease-in-out; }
