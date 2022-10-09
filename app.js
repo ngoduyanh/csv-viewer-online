@@ -1,33 +1,31 @@
-var input = document.getElementById('input-file')
+var input = document.getElementById('input-url')
 var handsontableContainer = document.getElementById('handsontable-container')
+var btn = document.getElementById('open')
 
-input.onchange = function () {
-  var file = this.files[0]
-  var reader = new FileReader()
-
-  reader.onload = function (e) {
-    var csv = e.target.result
-    var data = Papa.parse(csv, {
-      header: true,
-      skipEmptyLines: true
+btn.onclick = function () {
+  fetch(input.value)
+    .then(r => r.text())
+    .then(csv => {
+      var data = Papa.parse(csv, {
+        header: true,
+        skipEmptyLines: true
+      })
+  
+      // reset container
+      handsontableContainer.innerHTML = ''
+      handsontableContainer.className = ''
+      document.querySelector('.intro').remove()
+  
+      Handsontable(handsontableContainer, {
+        data: data.data,
+        rowHeaders: true,
+        colHeaders: data.meta.fields,
+        columnSorting: true,
+        dropdownMenu: true,
+        filters: true,
+        width: '100%',
+        licenseKey: 'non-commercial-and-evaluation',
+      })
     })
-
-    // reset container
-    handsontableContainer.innerHTML = ''
-    handsontableContainer.className = ''
-    document.querySelector('input').remove()
-    document.querySelector('.github-corner').remove()
-    document.querySelector('.place-your-ad-here').remove()
-
-    Handsontable(handsontableContainer, {
-      data: data.data,
-      rowHeaders: true,
-      colHeaders: data.meta.fields,
-      columnSorting: true,
-      width: '100%',
-      licenseKey: 'non-commercial-and-evaluation',
-    })
-  }
-
-  file && reader.readAsText(file)
+    .catch(e => console.log(e))
 }
